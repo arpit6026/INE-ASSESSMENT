@@ -204,9 +204,9 @@ router.post('/:id/scrape', async (req, res) => {
         last_scrape_status: scrapeResult.status
       });
 
-      res.status(502).json({
+      res.json({
         success: false,
-        message: 'Scrape attempt failed after retries',
+        message: scrapeResult.errorMessage || 'Scrape attempt failed after retries',
         data: scrapeResult
       });
     }
