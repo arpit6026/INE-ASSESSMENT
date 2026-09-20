@@ -2,6 +2,7 @@ import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import path from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
 
 import catalogRoutes from './routes/catalog.js';
@@ -37,25 +38,27 @@ app.use('/api/cron', cronRoutes);
 app.use('/api/alerts', alertsRoutes);
 app.use('/api/demo', demoRoutes);
 
-// Root route
-app.get('/', (req, res) => {
-  res.json({
-    name: 'INE Product Price Tracker Backend',
-    version: '1.0.0',
-    status: 'online',
-    mockStore: 'https://demo.inelabteamdev.com',
-    endpoints: [
-      '/api/catalog/search',
-      '/api/catalog/sync',
-      '/api/products',
-      '/api/history/:productId',
-      '/api/logs',
-      '/api/cron/scrape',
-      '/api/cron/health',
-      '/api/alerts'
-    ]
+// Serve frontend static dist build if present
+const frontendDistDir = path.join(__dirname, '../../frontend/dist');
+if (fs.existsSync(frontendDistDir)) {
+  console.log('[Server] Serving compiled React frontend from:', frontendDistDir);
+  app.use(express.static(frontendDistDir));
+  app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api') || req.path.startsWith('/recordings')) {
+      return next();
+    }
+    res.sendFile(path.join(frontendDistDir, 'index.html'));
   });
-});
+} else {
+  app.get('/', (req, res) => {
+    res.json({
+      name: 'INE Product Price Tracker Fullstack Service',
+      version: '1.0.0',
+      status: 'online',
+      mockStore: 'https://demo.inelabteamdev.com'
+    });
+  });
+}
 
 app.listen(PORT, () => {
   console.log(`====================================================`);
