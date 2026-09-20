@@ -1,4 +1,13 @@
-const BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api';
+export function getBaseUrl() {
+  let url = (import.meta.env.VITE_API_BASE_URL || '/api').trim();
+  url = url.replace(/\/+$/, '');
+  if (url.startsWith('http') && !url.endsWith('/api')) {
+    url += '/api';
+  }
+  return url;
+}
+
+const BASE_URL = getBaseUrl();
 
 export async function fetchCatalog(query = '', category = '', page = 1, limit = 20) {
   const params = new URLSearchParams({ q: query, category, page: String(page), limit: String(limit) });

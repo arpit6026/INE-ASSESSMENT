@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import { X, Play, Video, ShieldAlert, CheckCircle2, RefreshCw, Terminal } from 'lucide-react';
-import { triggerHeadedDemo } from '../services/api';
+import { triggerHeadedDemo, getBaseUrl } from '../services/api';
 
 export default function ObservableRunnerModal({ onClose }) {
   const [running, setRunning] = useState(false);
   const [logs, setLogs] = useState([]);
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
+
+  const base = getBaseUrl();
+  const backendRoot = base.startsWith('http') ? base.replace(/\/api$/, '') : '';
+  const videoSrc = `${backendRoot}/recordings/headed_scraper_demo.webm`;
 
   async function handleRunDemo() {
     setRunning(true);
@@ -133,7 +137,7 @@ export default function ObservableRunnerModal({ onClose }) {
               <video 
                 controls 
                 style={{ width: '100%', height: '100%' }}
-                src="/recordings/headed_scraper_demo.webm"
+                src={videoSrc}
               >
                 Your browser does not support the video tag.
               </video>
