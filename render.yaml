@@ -3,7 +3,7 @@ services:
     name: ine-price-tracker-fullstack
     env: node
     plan: free
-    buildCommand: cd frontend && npm install && npm run build && cd ../backend && npm install && npx playwright install chromium
+    buildCommand: cd frontend && npm install --include=dev && npm run build && cd ../backend && npm install && npx playwright install chromium
     startCommand: node backend/src/server.js
     envVars:
       - key: PORT
