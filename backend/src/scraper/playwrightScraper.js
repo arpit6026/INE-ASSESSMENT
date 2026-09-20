@@ -46,7 +46,8 @@ export async function scrapeProductPrice(productId, options = {}) {
         '--disable-gpu',
         '--no-first-run',
         '--no-zygote',
-        '--single-process'
+        '--single-process',
+        '--disable-blink-features=AutomationControlled'
       ]
     });
 
@@ -63,6 +64,12 @@ export async function scrapeProductPrice(productId, options = {}) {
     }
 
     const context = await browser.newContext(contextOptions);
+    await context.addInitScript(() => {
+      Object.defineProperty(navigator, 'webdriver', { get: () => undefined });
+      window.chrome = { runtime: {} };
+      Object.defineProperty(navigator, 'plugins', { get: () => [1, 2, 3, 4] });
+      Object.defineProperty(navigator, 'languages', { get: () => ['en-US', 'en'] });
+    });
     const page = await context.newPage();
 
     // Listen to network events to track simulated upstream errors (e.g. 503, 429)
