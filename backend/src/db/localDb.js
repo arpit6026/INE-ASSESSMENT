@@ -70,7 +70,7 @@ export const localDb = {
       const newProduct = {
         ...productData,
         id,
-        is_tracked: productData.is_tracked !== undefined ? productData.is_tracked : true,
+        is_tracked: productData.is_tracked !== undefined ? productData.is_tracked : false,
         scrape_frequency_hours: productData.scrape_frequency_hours || 2,
         created_at: now,
         updated_at: now
