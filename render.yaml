@@ -3,13 +3,15 @@ services:
     name: ine-price-tracker-fullstack
     env: node
     plan: free
-    buildCommand: cd frontend && npm install --include=dev && npm run build && cd ../backend && npm install && npx playwright install chromium
+    buildCommand: cd frontend && npm install --include=dev && npm run build && cd ../backend && npm install && PLAYWRIGHT_BROWSERS_PATH=0 npx playwright install chromium
     startCommand: node backend/src/server.js
     envVars:
       - key: PORT
         value: 10000
       - key: NODE_ENV
         value: production
+      - key: PLAYWRIGHT_BROWSERS_PATH
+        value: "0"
       - key: MOCK_STORE_URL
         value: https://demo.inelabteamdev.com
       - key: CRON_SECRET

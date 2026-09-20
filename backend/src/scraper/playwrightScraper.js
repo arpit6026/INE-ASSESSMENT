@@ -1,7 +1,31 @@
 import { chromium } from 'playwright';
+import { execSync } from 'child_process';
 import { normalizePriceText, parseStockText } from './parser.js';
 
 const TARGET_BASE_URL = process.env.MOCK_STORE_URL || 'https://demo.inelabteamdev.com';
+
+async function safeLaunchChromium(launchOptions, emitLog) {
+  try {
+    return await chromium.launch(launchOptions);
+  } catch (err) {
+    if (err.message && (err.message.includes("Executable doesn't exist") || err.message.includes("npx playwright install"))) {
+      if (emitLog) emitLog('warn', 'Chromium binary missing. Auto-installing Chromium on-the-fly...');
+      console.log('[Playwright] Chromium executable missing. Running npx playwright install chromium...');
+      try {
+        execSync('npx playwright install chromium', {
+          stdio: 'inherit',
+          env: { ...process.env, PLAYWRIGHT_BROWSERS_PATH: '0' }
+        });
+        if (emitLog) emitLog('info', 'Chromium auto-installation completed successfully.');
+        return await chromium.launch(launchOptions);
+      } catch (installErr) {
+        console.error('[Playwright] Auto-installation failed:', installErr.message);
+        throw err;
+      }
+    }
+    throw err;
+  }
+}
 
 /**
  * Scrapes a single product's price and stock from INE's mock storefront.
@@ -35,7 +59,7 @@ export async function scrapeProductPrice(productId, options = {}) {
   emitLog('info', `Initiating scrape for product ${productId} (mode: ${headed ? 'headed' : 'headless'})`);
 
   try {
-    browser = await chromium.launch({
+    browser = await safeLaunchChromium({
       headless: !headed,
       slowMo: slowMo,
       args: [
