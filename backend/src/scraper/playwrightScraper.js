@@ -378,36 +378,6 @@ export async function scrapeProductPrice(productId, options = {}) {
       try { await browser.close(); } catch (_) {}
     }
 
-    // High-resilience fallback: attempt to fetch product details from store API directly
-    try {
-      const fallbackRes = await fetch(`${TARGET_BASE_URL}/api/product/${productId}`);
-      if (fallbackRes.ok) {
-        const item = await fallbackRes.json();
-        if (item && item.id) {
-          const fallbackPrice = item.current_price || item.price || 19999;
-          const fallbackMrp = item.mrp || Math.round(fallbackPrice * 1.2);
-          const fallbackStock = item.current_stock !== undefined ? item.current_stock : 15;
-          
-          return {
-            success: true,
-            productId,
-            price: fallbackPrice,
-            mrp: fallbackMrp,
-            currency: 'INR',
-            stock: fallbackStock,
-            stockStatus: fallbackStock > 0 ? 'in_stock' : 'out_of_stock',
-            stockLabel: `${fallbackStock} in stock`,
-            attemptCount: 1,
-            status: 'SUCCESS',
-            errorMessage: null,
-            durationMs,
-            networkLogs,
-            videoPath: null
-          };
-        }
-      }
-    } catch (_) {}
-
     return {
       success: false,
       productId,
