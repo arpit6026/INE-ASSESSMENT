@@ -1,0 +1,20 @@
+{
+  "name": "ine-price-tracker-backend",
+  "version": "1.0.0",
+  "description": "Backend service for INE Product Price Tracker with scheduled Playwright scraper",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "headed-demo": "node ../scripts/run_headed_demo.js",
+    "migrate:supabase": "node scripts/migrate_to_supabase.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "playwright": "^1.50.1"
+  }
+}

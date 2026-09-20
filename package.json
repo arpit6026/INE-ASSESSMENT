@@ -1,0 +1,24 @@
+{
+  "name": "ine-product-price-tracker",
+  "version": "1.0.0",
+  "description": "Full-stack Product Price Tracker with scheduled Playwright scraping, Recharts history, and honest audit logging for INE assignment",
+  "type": "module",
+  "scripts": {
+    "start": "cd backend && npm start",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "build:frontend": "cd frontend && npm run build",
+    "headed-demo": "node scripts/run_headed_demo.js"
+  },
+  "keywords": [
+    "playwright",
+    "web-scraping",
+    "ine",
+    "price-tracker",
+    "react",
+    "express",
+    "supabase"
+  ],
+  "author": "Software Engineer Intern Candidate",
+  "license": "MIT"
+}
