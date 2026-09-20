@@ -7,6 +7,8 @@
     "start": "cd backend && npm start",
     "dev:backend": "cd backend && npm run dev",
     "dev:frontend": "cd frontend && npm run dev",
+    "build": "cd frontend && npm install && npm run build",
+    "vercel-build": "cd frontend && npm install && npm run build",
     "build:frontend": "cd frontend && npm run build",
     "headed-demo": "node scripts/run_headed_demo.js"
   },

@@ -5,7 +5,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://ine-price-tracker-backend.onrender.com/api/:path*"
+      "destination": "https://ine-assessment-l286.onrender.com/api/:path*"
     }
   ]
 }
