@@ -34,16 +34,16 @@
       "category": "Audio",
       "sku": "LAR-10003",
       "description": "The Larkspur Speaker Pro. A dependable audio pick with a clean, no-nonsense design and the everyday features you actually use.",
-      "is_tracked": false,
+      "is_tracked": true,
       "scrape_frequency_hours": 2,
       "created_at": "2026-09-19T23:18:20.025Z",
-      "updated_at": "2026-09-20T13:38:29.054Z",
+      "updated_at": "2026-09-20T13:42:17.846Z",
       "current_price": 17261,
       "mrp": 37524,
       "current_stock": 179,
       "stock_status": "in_stock",
       "stock_label": "Hurry, just 179 left",
-      "last_scraped_at": "2026-09-20T13:36:56.996Z",
+      "last_scraped_at": "2026-09-20T13:42:17.846Z",
       "last_scrape_status": "SUCCESS"
     },
     {
@@ -13045,9 +13045,53 @@
       "stock_status": "in_stock",
       "currency": "INR",
       "scraped_at": "2026-09-20T13:36:57.199Z"
+    },
+    {
+      "id": "ph_1789911731014_eq5ns1",
+      "product_id": 3,
+      "price": 17261,
+      "mrp": 37524,
+      "stock": 179,
+      "stock_status": "in_stock",
+      "currency": "INR",
+      "scraped_at": "2026-09-20T13:42:11.014Z"
+    },
+    {
+      "id": "ph_1789911738046_5knmzy",
+      "product_id": 3,
+      "price": 17261,
+      "mrp": 37524,
+      "stock": 179,
+      "stock_status": "in_stock",
+      "currency": "INR",
+      "scraped_at": "2026-09-20T13:42:18.046Z"
     }
   ],
   "scrape_logs": [
+    {
+      "id": "log_1789911730627_pyyt6m",
+      "product_id": 3,
+      "attempt_number": 2,
+      "status": "RETRIED",
+      "error_message": null,
+      "duration_ms": 3552,
+      "price_extracted": 17261,
+      "stock_extracted": 179,
+      "mode": "headless",
+      "created_at": "2026-09-20T13:42:10.627Z"
+    },
+    {
+      "id": "log_1789911416794_74lf84",
+      "product_id": 3,
+      "attempt_number": 1,
+      "status": "SUCCESS",
+      "error_message": null,
+      "duration_ms": 2755,
+      "price_extracted": 17261,
+      "stock_extracted": 179,
+      "mode": "headless",
+      "created_at": "2026-09-20T13:36:56.794Z"
+    },
     {
       "id": "log_1789910928174_l0bv8o",
       "product_id": 10,
@@ -13073,16 +13117,16 @@
       "created_at": "2026-09-20T13:28:40.090Z"
     },
     {
-      "id": "log_1789911416794_74lf84",
+      "id": "log_1789911737659_7xc5gt",
       "product_id": 3,
       "attempt_number": 1,
       "status": "SUCCESS",
       "error_message": null,
-      "duration_ms": 2755,
+      "duration_ms": 3236,
       "price_extracted": 17261,
       "stock_extracted": 179,
       "mode": "headless",
-      "created_at": "2026-09-20T13:36:56.794Z"
+      "created_at": "2026-09-20T13:42:17.660Z"
     }
   ],
   "alerts": []

@@ -45,7 +45,7 @@ export default function TrackedProductsList({
     );
   }
 
-  const renderStatusBadge = (status, lastScrapedAt) => {
+  const renderStatusBadge = (status, lastScrapedAt, currentPrice) => {
     if (!lastScrapedAt) {
       return <span className="badge badge-neutral">Pending initial scrape</span>;
     }
@@ -59,9 +59,17 @@ export default function TrackedProductsList({
     }
     if (status === 'RETRIED') {
       return (
-        <span className="badge badge-warning">
-          <AlertTriangle size={12} />
+        <span className="badge badge-success">
+          <CheckCircle size={12} />
           <span>Retried & Saved</span>
+        </span>
+      );
+    }
+    if (currentPrice && status !== 'FAILED' && status !== 'RETRIED_FAILED') {
+      return (
+        <span className="badge badge-success">
+          <CheckCircle size={12} />
+          <span>Success</span>
         </span>
       );
     }
@@ -215,7 +223,7 @@ export default function TrackedProductsList({
                   {/* Last Scrape */}
                   <td style={{ padding: '16px 16px' }}>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                      {renderStatusBadge(p.last_scrape_status, p.last_scraped_at)}
+                      {renderStatusBadge(p.last_scrape_status, p.last_scraped_at, p.current_price)}
                       <span style={{ color: 'var(--text-dim)', fontSize: '11px' }}>
                         {formatTimeAgo(p.last_scraped_at)}
                       </span>
